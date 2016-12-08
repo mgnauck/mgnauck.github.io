@@ -64,6 +64,12 @@
 	.prev
 	{
 		color:#84b018;
+		text-decoration:none;
+		cursor:pointer;
+	}
+	.prev-dis
+	{
+		color:#84b018;
 		text-decoration:line-through;
 		cursor:pointer;
 	}
@@ -71,6 +77,12 @@
 	{
 		color:#84b018;
 		text-decoration:none;
+		cursor:pointer;
+	}
+	.next-dis
+	{
+		color:#84b018;
+		text-decoration:line-through;
 		cursor:pointer;
 	}
 </style>
