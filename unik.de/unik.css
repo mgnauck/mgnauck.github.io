@@ -1,14 +1,4 @@
 <style type="text/css">
-	a
-	{
-		text-decoration: none;
-		color: #84b018;
-	}
-	a:hover
-	{
-		text-decoration:none;
-		color:#a0e081;
-	}
 	.main
 	{
 		background-color:#262626;
@@ -25,7 +15,17 @@
 		font-weight:bold;
 		color:#84b018;
 	}
-	.reference
+	.link
+	{
+		text-decoration:none;
+		color:#84b018;
+	}
+	.link:hover
+	{
+		text-decoration:none;
+		color:#a0e081;
+	}
+	.product
 	{
 		width:640px;
 		padding:15px;
