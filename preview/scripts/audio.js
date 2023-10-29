@@ -1,10 +1,14 @@
 let audio;
 let audioLoaded = false;
 
-function loadAudio(resource)
+function loadAudio(url)
 {
   audioLoaded = false;
-  audio = new Audio(resource);
+  audio = new Audio(url);
+  audio.addEventListener("canplaythrough", (e) => {
+    audioLoaded = true;
+    console.log(`Audio ${url} loaded`);
+  });
 }
 
 function playAudio()

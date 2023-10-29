@@ -1,14 +1,5 @@
 "use strict";
 
-function initializeLoadEventListener()
-{
-  // Audio loaded
-  audio.addEventListener("canplaythrough", (e) =>
-    {
-      audioLoaded = true;
-    });
-}
-
 function initializeEventListener()
 {
   // Resize canvas on window resize
@@ -53,12 +44,10 @@ function initializeEventListener()
   canvas.addEventListener("touchstart", (e) =>
     {  
       e.preventDefault();
-      if(running)
-      {
-        toggleFullscreen();
-        return;
-      }
-      else if(startByEvent)
+
+      toggleFullscreen();
+
+      if(startByEvent && !running)
       {
         start();
       }

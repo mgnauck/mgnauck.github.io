@@ -68,7 +68,7 @@ function showStartScreen()
   context.fillStyle = "rgba(0, 0, 0, 255)";
   context.clearRect(0, 0, width, height);
 
-  context.drawImage(logo, 0, 0);
+  context.drawImage(getImage("unikLogo"), 0, 0);
 
   context.fillStyle = "rgba(255, 255, 255, 255)";
   context.fillText("Loading completed.", 3, 220);
@@ -86,11 +86,8 @@ function load()
 
   // Load data
   loadAudio("audio/music.mp3");
-  logo = loadImage("images/unik2.png");
+  loadImage("images/unik2.png", "unikLogo");
   // TODO
-
-  // Loading event listener
-  initializeLoadEventListener();
 
   // Start checking if loading has completed
   loadingIntervalId = setInterval(isLoadingComplete, 200);
@@ -98,7 +95,7 @@ function load()
 
 function isLoadingComplete()
 {
-  let finished = audioLoaded && imagesLoaded;
+  let finished = audioLoaded && imagesLoaded();
   if(finished)
   {
     // Stop checking if loading has completed
