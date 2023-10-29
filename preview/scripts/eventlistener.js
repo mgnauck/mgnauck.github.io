@@ -49,6 +49,7 @@ function initializeEventListener()
       }
       else
       {
+        alert("Toggle");
         toggleFullscreen();
       }
     });
