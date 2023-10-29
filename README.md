@@ -44,7 +44,7 @@ Released at Breakpoint 2006. Placed 6th in the 64kb intro competition.
 Released at Evoke 2005. Placed 3rd in the 4kb intro competition.
 
 - [Pouet](https://www.pouet.net/prod.php?which=18755)
-- [YouTube](soon)
+- [YouTube](https://www.youtube.com/watch?v=Y09mzeJyqGI)
 - [Windows binaries](https://files.scene.org/view/parties/2005/evoke05/in4k/kurz_knackig_final.zip)
 - [Source](https://github.com/mgnauck/kurz-und-knackig)
 
