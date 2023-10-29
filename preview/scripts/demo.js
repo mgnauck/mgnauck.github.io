@@ -13,7 +13,7 @@ let context;
 // Settings
 let fullscreen = false;
 const debugMode = true;
-const noAudio = false;
+const noAudio = true;
 
 // Window
 const width = canvas.width;
@@ -105,6 +105,11 @@ function load()
 
 function isLoadingComplete()
 {
+  if(!loading)
+  {
+    return;
+  }
+
   let finished = (audioLoaded || noAudio) && imagesLoaded();
   if(finished)
   {
@@ -144,11 +149,11 @@ function start()
 
   console.log("Starting");
 
-  // Store global start time
-  globalStartTime = window.performance.now();
-
   // Start to play audio
   playAudio();
+
+  // Store global start time
+  globalStartTime = window.performance.now();
 
   // Render the first frame
   requestFrameUpdate();
@@ -171,7 +176,7 @@ function stop()
     pauseAudio();
 
     // Cancel previous frame
-    if(requestAnimationFrameId != undefined)
+    if(typeof requestAnimationFrameId !== undefined)
     {
       window.cancelAnimationFrame(requestAnimationFrameId);
     }
@@ -186,7 +191,7 @@ function render(time)
   //fill(backBuffer32, 0xff000000 + getRandomInt(0xffffff));
   //fill(backBuffer32, 0xff00ffff);
 
-  let timeVal = time * 0.009123;
+  let timeVal = time * ((noAudio || !audioPlaying) ? 0.009123 : 10.0);
   let scale = Math.cos(degToRad(timeVal * 3.4)) * 3.0 + 3.2;
 
   for(let y=0; y<height; y++)
@@ -207,7 +212,7 @@ function updateFrame()
   let beginFrameTime = window.performance.now();
 
   // Render content
-  render(beginFrameTime - globalStartTime);
+  render((noAudio || !audioPlaying) ? (beginFrameTime - globalStartTime) : audio.currentTime);
 
   // Make back buffer content visible on context
   present();
