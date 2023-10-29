@@ -7,6 +7,7 @@ Released at Deadline 2023. Place 6th in the combined intro competition.
 
 - [Pouet]()
 - [Online](https://unik.de/online/elusive)
+- [Binaries](https://unik.de/download/bypass-elusive.zip)
 - [Source](https://github.com/mgnauck/elusive/)
 
 ![elusive screenshot](images/elusive/elusive_1.png "elusive")
