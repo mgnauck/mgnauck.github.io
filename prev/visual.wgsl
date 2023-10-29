@@ -1,19 +1,14 @@
 struct Uniforms
 {
-  right: vec3f,
-  tanHalfFov: f32,
-  up: vec3f,
+  radius: f32,
+  phi: f32,
+  theta: f32,
   time: f32,
-  forward: vec3f,
-  ruleSet: f32,
-  eye: vec3f,
-  freeValue2: f32
 }
 
 struct Grid
 {
   mul: vec3i,
-  zOfs: u32,
   arr: array<u32>
 }
 
@@ -37,20 +32,6 @@ struct Hit
 const WIDTH = 1024;
 const HEIGHT = WIDTH / 1.6;
 const EPSILON = 0.001;
-
-// TODO Edit! For now these values just align the brightness due to changing state count.
-const ruleSetTints = array<vec3f, 11>(
-  vec3f(1.0), // clouds-5
-  vec3f(1.0), // 44-5
-  vec3f(1.0), // amoeba-5
-  vec3f(0.25), // pyro-10
-  vec3f(1.0), // framework-5
-  vec3f(0.25), // spiky-10
-  vec3f(0.25), // builder-10
-  vec3f(0.25), // ripple-10
-  vec3f(0.5), // shells-7
-  vec3f(0.25), // pulse-10
-  vec3f(1.0)); // more-builds-5
 
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
 @group(0) @binding(1) var<storage> grid: Grid;
@@ -120,12 +101,7 @@ fn evalState(pos: vec3i, states: u32)
 @compute @workgroup_size(4,4,4)
 fn computeMain(@builtin(global_invocation_id) globalId: vec3u)
 {
-  var pos = vec3i(i32(globalId.x), i32(globalId.y), i32(globalId.z + grid.zOfs));
-  if(pos.z >= grid.mul.y) {
-    return;
-  }
-
-  evalState(pos, rules.states);
+  evalState(vec3i(globalId), rules.states);
 }
 
 fn minComp(v: vec3f) -> f32
@@ -136,12 +112,6 @@ fn minComp(v: vec3f) -> f32
 fn maxComp(v: vec3f) -> f32
 {
   return max(v.x, max(v.y, v.z));
-}
-
-fn intersectGround(d: f32, ori: vec3f, dir: vec3f, t: ptr<function, f32>) -> bool
-{
-  *t = step(EPSILON, abs(dir.y)) * ((d - ori.y) / dir.y);
-  return bool(step(EPSILON, *t));
 }
 
 fn intersectAabb(minExt: vec3f, maxExt: vec3f, ori: vec3f, invDir: vec3f, tmin: ptr<function, f32>, tmax: ptr<function, f32>) -> bool
@@ -225,19 +195,13 @@ fn shade(pos: vec3f, dir: vec3f, hit: ptr<function, Hit>) -> vec3f
     return vec3f(0);
   }*/
 
-  let val = f32(rules.states) / f32(min((*hit).state, rules.states));
+  let cnt = f32(rules.states);
+  let val = cnt / min(f32((*hit).state), cnt);
   let sky = 0.4 + (*hit).norm.y * 0.6;
-  let col = vec3f(0.005) + ruleSetTints[u32(uniforms.ruleSet)] * (vec3f(0.5) + pos / f32(grid.mul.y)) * sky * sky * val * val * 0.3 * exp(-3.5 * (*hit).dist / (*hit).maxDist);
+  let col = vec3f(0.005) + (1.0 - 0.15 * (cnt - 5.0)) * (vec3f(0.5) + pos / f32(grid.mul.y)) * sky * sky * val * val * 0.3 * exp(-3.5 * (*hit).dist / (*hit).maxDist);
   let occ = calcOcclusion(pos, (*hit).index, vec3i((*hit).norm));
 
   return col * occ * occ * occ;
-}
-
-fn background(ori: vec3f, dir: vec3f) -> vec3f
-{
-  // TODO Make much better background
-  let a = 0.5 + abs(dir.y) * 0.5;
-  return 0.05 * vec3f(0.3, 0.3, 0.4) * vec3f(pow(a, 42.0)); 
 }
 
 fn trace(ori: vec3f, dir: vec3f, hit: ptr<function, Hit>) -> bool
@@ -257,7 +221,7 @@ fn trace(ori: vec3f, dir: vec3f, hit: ptr<function, Hit>) -> bool
     }
   }
 
-  (*hit).col = background(ori, dir);
+  (*hit).col = vec3f(0);
 
   return false;
 }
@@ -283,52 +247,17 @@ fn vertexMain(@builtin(vertex_index) vertexIndex: u32) -> @builtin(position) vec
 @fragment
 fn fragmentMain(@builtin(position) position: vec4f) -> @location(0) vec4f
 {
-  // Framebuffer y-down in webgpu
-  let dirEyeSpace = normalize(vec3f((position.xy - vec2f(WIDTH, HEIGHT) * 0.5) / f32(HEIGHT), uniforms.tanHalfFov));
-  var dir = uniforms.right * dirEyeSpace.x - uniforms.up * dirEyeSpace.y + uniforms.forward * dirEyeSpace.z;
-  var ori = uniforms.eye;
+  let dirEyeSpace = normalize(vec3f((position.xy - vec2f(WIDTH, HEIGHT) * 0.5) / f32(HEIGHT), 1 /* FOV */));
 
-  var col = vec3f(0.0);
+  let ori = vec3f(uniforms.radius * cos(uniforms.theta) * cos(uniforms.phi), uniforms.radius * sin(uniforms.theta), uniforms.radius * cos(uniforms.theta) * sin(uniforms.phi));
+
+  let fwd = normalize(-ori);
+  let ri = normalize(cross(fwd, vec3f(0, 1, 0)));
+  let up = cross(ri, fwd);
+
+  var dir = ri * dirEyeSpace.x - up * dirEyeSpace.y + fwd * dirEyeSpace.z;
+
   var hit: Hit;
-
-  // Normal cell grid
   trace(ori, dir, &hit);
-  col = hit.col;
- 
-  /*
-  // Normal cell grid with ground reflection
-  if(!trace(ori, dir, &hit)) {
-    var t: f32;
-    if(intersectGround(-30.0, ori, dir, &t)) {
-      let newDir = reflect(dir, vec3f(0.0, 1.0, 0.0));
-      var newOri = ori + t * dir;
-      newOri += newDir * vec3f(5.0 * sin(newOri.x + uniforms.time * 0.0015), 0.0, 1.5 * sin(newOri.y + uniforms.time * 0.003));
-      trace(newOri, newDir, &hit);
-    }
-  }
-  col = hit.col;
-  */
-
-  /*
-  // All cells reflecting
-  var iter = 1.0;
-  loop {
-    let cellHit = trace(ori, dir, &hit);
-    col += hit.col;
-    if(!cellHit || iter > 2.0) {
-      break;
-    } 
-    dir = reflect(dir, hit.norm);
-    ori = hit.pos + EPSILON * dir;
-    iter += 1.0;
-  }
-  col /= iter;
-  */ 
-
-  // Amplify
-  //col += pow(max(col - vec3f(0.3), vec3f(0.0)), vec3f(1.5)) * 0.5;
-  
-  col = filmicToneACES(col);
-
-  return vec4f(pow(col, vec3f(0.4545)), 1.0);
+  return vec4f(pow(filmicToneACES(hit.col), vec3f(0.4545)), 1.0);
 }
