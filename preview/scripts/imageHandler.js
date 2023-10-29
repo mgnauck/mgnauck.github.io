@@ -1,6 +1,6 @@
 "use strict";
 
-let images = {};
+let images = new Map();
 
 function loadImage(url, id)
 {
@@ -8,7 +8,7 @@ function loadImage(url, id)
 
   image.onload = () => {
 
-    images[id].loaded = true;
+    images.get(id).loaded = true;
 
     console.log(`Image ${url} loaded and available via '${id}'`);
   };
@@ -19,7 +19,7 @@ function loadImage(url, id)
   }
 
   // Store image in our images array
-  images[id] = { "image" : image, "loaded" : false };
+  images.set(id, { image: image, loaded: false, url: url });
 
   // Start loading the image
   image.src = url;
@@ -40,5 +40,5 @@ function imagesLoaded()
 
 function getImage(id)
 {
-  return images[id].image;
+  return images.get(id).image;
 }

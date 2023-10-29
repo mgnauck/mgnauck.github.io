@@ -40,9 +40,9 @@ function initializeEventListener()
   // Touch canvas to start or if running toggle fullscreen
   canvas.addEventListener("touchstart", (e) => {
 
-    e.preventDefault();
+    //e.preventDefault();
 
-    toggleFullscreen();
+    //toggleFullscreen();
 
     if(startByEvent && !running)
     {

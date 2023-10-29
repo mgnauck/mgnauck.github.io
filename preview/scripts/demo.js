@@ -1,7 +1,7 @@
 "use strict";
 
 /// TODO
-/// Timeline handling
+/// Timeline/effects/sync handling
 /// Rewrite as classes
 /// Renderer
 
