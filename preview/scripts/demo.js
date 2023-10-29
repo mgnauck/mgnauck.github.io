@@ -1,7 +1,6 @@
 "use strict";
 
 /// TODO
-/// Load audio
 /// Load image
 /// Timeline handling
 /// Rewrite as classes
@@ -19,11 +18,12 @@ const aspect = width / height;
 
 // Settings
 const debugMode = true;
-const startByEvent = false;
+const startByEvent = true;
 const frameRateLimitEnabled = false;
 const frameRateLimit = 100;
 
-// Update frame
+// Update
+let loadingIntervalId;
 let requestAnimationFrameId = null;
 
 // Timing
@@ -51,35 +51,77 @@ function initialize()
 
   // Load all data
   load();
-
-  // Setup event listener
-  initializeEventListener();
-
-  // Start immediately
-  if(!startByEvent)
-  {
-    start();
-  }
 }
 
-function showLoadingScreen()
+function showLoadingScreen(percentProgress)
 {
+  context.fillStyle = "rgba(0, 0, 0, 255)";
+  context.clearRect(0, 0, width, height);
+
   context.fillStyle = "rgba(255, 255, 255, 255)";
   context.font = "bold 20px serif";
   context.fillText("Loading..", 3, 20);
-  context.fillText("Press F, click or touch again to toggle fullscreen.", 3, 43);
+}
+
+function showStartScreen()
+{
+  context.fillStyle = "rgba(0, 0, 0, 255)";
+  context.clearRect(0, 0, width, height);
+
+  context.drawImage(logo, 0, 0);
+
+  context.fillStyle = "rgba(255, 255, 255, 255)";
+  context.fillText("Loading completed.", 3, 220);
+  context.fillText("Press F, click or touch again to toggle fullscreen.", 3, 243);
 
   if(startByEvent)
   {
-    context.fillText("Press space, click or touch to start.", 3, 66);
+    context.fillText("Press space, click or touch to start.", 3, 266);
   }
 }
 
 function load()
 {
-  showLoadingScreen();
+  showLoadingScreen(0);
 
-  // TODO Load data
+  // Load data
+  loadAudio("audio/music.mp3");
+  logo = loadImage("images/unik2.png");
+  // TODO
+
+  // Loading event listener
+  initializeLoadEventListener();
+
+  // Start checking if loading has completed
+  loadingIntervalId = setInterval(isLoadingComplete, 200);
+}
+
+function isLoadingComplete()
+{
+  let finished = audioLoaded && imagesLoaded;
+  if(finished)
+  {
+    // Stop checking if loading has completed
+    clearInterval(loadingIntervalId);
+
+    showStartScreen();
+
+    // Setup event listener
+    initializeEventListener();
+
+    // Start immediately
+    if(!startByEvent)
+    {
+      start();
+    }    
+  }
+  else
+  {
+    showLoadingScreen(0);
+
+    // Reset check if loading has completed
+    loadingIntervalId = setInterval(isLoadingComplete, 200);
+  }
 }
 
 function start()
@@ -89,6 +131,9 @@ function start()
 
   // Store global start time
   globalStartTime = window.performance.now();
+
+  // Start to play audio
+  playAudio();
 
   // Render the first frame
   requestFrameUpdate();
@@ -104,6 +149,9 @@ function stop()
   {
     window.cancelAnimationFrame(requestAnimationFrameId);
   }
+
+  // Stop audio playing
+  pauseAudio();
 
   // Note we are stopped
   running = false;  

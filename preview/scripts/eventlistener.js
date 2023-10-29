@@ -1,5 +1,14 @@
 "use strict";
 
+function initializeLoadEventListener()
+{
+  // Audio loaded
+  audio.addEventListener("canplaythrough", (e) =>
+    {
+      audioLoaded = true;
+    });
+}
+
 function initializeEventListener()
 {
   // Resize canvas on window resize
