@@ -1,8 +1,6 @@
 "use strict";
 
 /// TODO
-/// 
-/// Smooth FPS
 /// Load audio
 /// Load image
 /// Timeline handling
@@ -21,7 +19,7 @@ const aspect = width / height;
 
 // Settings
 const debugMode = true;
-const startByEvent = true;
+const startByEvent = false;
 const frameRateLimitEnabled = false;
 const frameRateLimit = 100;
 
@@ -114,10 +112,10 @@ function stop()
 function render(time)
 {
   //fill(backBuffer32, 0xff000000 + getRandomInt(0xffffff));
-  //fill(backBuffer32, 0xff00ff00);
+  //fill(backBuffer32, 0xff00ffff);
 
-  let timeVal = time * 0.009;
-  let scale = Math.cos(degToRad(timeVal));
+  let timeVal = time * 0.009123;
+  let scale = Math.cos(degToRad(timeVal * 3.4)) * 3.0 + 3.2;
 
   for(let y=0; y<height; y++)
   {
@@ -129,6 +127,7 @@ function render(time)
       pixel(backBuffer32, x, y, 0xff000000 + (c << 16) + (c << 8) + c);
     }    
   }
+  //*/
 }
 
 function updateFrame()

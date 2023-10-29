@@ -29,13 +29,14 @@ function initializeEventListener()
   // Click to start or if running toggle fullscreen
   document.addEventListener("click", (e) =>
     { 
-      if(startByEvent && !running)
-      {
-        start();
-      }
-      else
+      if(running)
       {
         toggleFullscreen();
+        return;
+      }
+      else if(startByEvent)
+      {
+        start();
       }
     });
 
@@ -43,14 +44,14 @@ function initializeEventListener()
   canvas.addEventListener("touchstart", (e) =>
     {  
       e.preventDefault();
-      if(startByEvent && !running)
+      if(running)
+      {
+        toggleFullscreen();
+        return;
+      }
+      else if(startByEvent)
       {
         start();
-      }
-      else
-      {
-        alert("Toggle");
-        toggleFullscreen();
       }
     });
 
