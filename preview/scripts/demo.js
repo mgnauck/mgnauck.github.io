@@ -1,5 +1,14 @@
 "use strict";
 
+/// TODO
+/// 
+/// Smooth FPS
+/// Load audio
+/// Load image
+/// Timeline handling
+/// Rewrite as classes
+/// Renderer
+
 // Canvas
 let canvas = document.getElementById("demodemo");
 let context;
