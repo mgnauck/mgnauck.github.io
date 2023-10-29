@@ -1,6 +1,20 @@
 
 # Selected works by unik and friends
 
+## elusive
+
+Released at Deadline 2023. Place 6th in the combined intro competition.
+
+- [Pouet]()
+- [Online](https://unik.de/online/elusive)
+- [Source](https://github.com/mgnauck/elusive/)
+
+![elusive screenshot](images/elusive/elusive_1.png "elusive")
+![elusive screenshot](images/elusive/elusive_2.png "elusive")
+
+![elusive screenshot](images/elusive/elusive_3.png "elusive")
+![elusive screenshot](images/elusive/elusive_4.png "elusive")
+
 ---
 
 ## Mac My Bitch Up
