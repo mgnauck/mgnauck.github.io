@@ -26,13 +26,19 @@
 		margin:20px;
 		padding:30px;
 	}
-	.title
+	.heading
 	{
+		font-family:Verdana;
+		font-size:20px;
+		font-weight:bold;
+		color:#84b018;
+		/*
 		width:220px;
 		color:#bbbbbb;
 		font-family:Helvetica, Verdana, Arial, sans-serif;
 		font-size:12px;
 		line-height: 15px;
+		*/
 	}
 	.reference
 	{
