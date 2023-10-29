@@ -60,6 +60,8 @@ function setupEventListener()
   // Fullscreen
   document.addEventListener("keydown", (e) => { if (e.key === "f") { toggleFullscreen(); } }, false);
   document.addEventListener("click", (e) => { toggleFullscreen(); }, false);
+  document.addEventListener("click", (e) => { toggleFullscreen(); }, false);
+  document.addEventListener("touchend", (e) => { toggleFullscreen(); }, false);
 
   // Display frames per second
   document.addEventListener("keydown", (e) => { if(e.key == "s" ) showFps = !showFps; }, false);
