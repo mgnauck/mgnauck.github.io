@@ -1,30 +1,33 @@
+"use strict";
+
 // Canvas
-const canvas = document.getElementById("demodemo");
+let canvas = document.getElementById("demodemo");
 const width = canvas.width;
 const height = canvas.height;
 const aspect = width / height;
 
 // Context
-var context
+let context;
 
 // Settings
-var fullscreen = false
-const startByEvent = false
-var showFps = true
+let fullscreen = false;
+const startByEvent = true;
+let showFps = true;
 
 // Back buffer
-var backBuffer = new ArrayBuffer(width * height * 4)
-var backBuffer8 = new Uint8ClampedArray(backBuffer)
-var backBuffer32 = new Uint32Array(backBuffer);
-var backBufferImageData = 0;
+let backBuffer = new ArrayBuffer(width * height * 4);
+let backBuffer8 = new Uint8ClampedArray(backBuffer);
+let backBuffer32 = new Uint32Array(backBuffer);
+let backBufferImageData = 0;
 
 // Update frame
 const limitFrameRate = true;
 const frameRateLimit = 100;
-var requestAnimationFrameId = null;
+let requestAnimationFrameId = null;
 
 // Timing
-var globalStartTime = 0
+let started = false;
+let globalStartTime = 0;
 
 function initialize()
 {  
@@ -35,7 +38,7 @@ function initialize()
   else
   {
     // Canvas not supported
-    console.log("Canvas not supported")
+    console.log("Canvas not supported");
     return;
   }
 
@@ -57,19 +60,60 @@ function initialize()
 
 function setupEventListener()
 {
-  // Fullscreen
-  document.addEventListener("keydown", (e) => { if (e.key === "f") { toggleFullscreen(); } }, false);
-  document.addEventListener("click", (e) => { toggleFullscreen(); }, false);
-  document.addEventListener("click", (e) => { toggleFullscreen(); }, false);
-  document.addEventListener("touchend", (e) => { toggleFullscreen(); }, false);
+  // Press F for fullscreen
+  document.addEventListener("keydown", (e) =>
+    {
+      if (e.key === "f")
+      {
+        toggleFullscreen();
+      }
+    });
+  
+  // Click to start 
+  document.addEventListener("click", (e) =>
+    { 
+      if(startByEvent)
+      {
+        start();
+      }
+    });
+
+  // Touch canvas for fullscreen and to start
+  canvas.addEventListener("touchstart", (e) =>
+    { 
+      toggleFullscreen(); 
+
+      if(startByEvent)
+      {
+        start();
+      }
+    });
 
   // Display frames per second
-  document.addEventListener("keydown", (e) => { if(e.key == "s" ) showFps = !showFps; }, false);
+  document.addEventListener("keydown", (e) =>
+    {
+      if(e.key == "s")
+      {
+        showFps = !showFps;
+      }
+    });
+
+  // Screen resize triggers new positioning of canvas
+  window.onresize = () =>
+    {
+      updateCanvasPosition()
+    };
 
   // Start by event
   if(startByEvent)
   {
-    document.addEventListener("keydown", (e) => { if (e.key === " ") { start(); } }, false);
+    document.addEventListener("keydown", (e) =>
+      {
+        if (e.key === " ")
+        {
+          start();
+        }
+      });
   }
 }
 
@@ -79,6 +123,8 @@ function showLoader()
   context.fillStyle = "rgba(255,255,255,255)";
   context.fillText("Press F or click to view fullscreen.", 3, 32);
   context.fillText("Press space to start.", 3, 70);
+
+  updateCanvasPosition();
 }
 
 function toggleFullscreen()
@@ -129,6 +175,31 @@ function exitFullscreen()
   fullscreen = false;
 }
 
+function updateCanvasPosition()
+{
+  canvas.style.position = 'absolute';
+  canvas.style.cursor = 'none';
+
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  const windowAspect = windowWidth / windowHeight;
+
+  if (windowAspect >= aspect)
+  {
+    canvas.style.top = "0px";
+    canvas.style.left = (windowWidth - (windowHeight * aspect)) / 2 + "px";
+    canvas.style.width = windowHeight * aspect + "px";
+    canvas.style.height = windowHeight + "px";
+  }
+  else
+  {
+    canvas.style.top = (windowHeight - (windowWidth / aspect)) / 2 + "px";
+    canvas.style.left = "0px";
+    canvas.style.width = windowWidth + "px";
+    canvas.style.height = windowWidth / aspect + "px";
+  }
+}
+
 function fillBuffer(buffer, color)
 {
   const length = width * height;
@@ -153,6 +224,9 @@ function start()
 
   // Store global start time
   globalStartTime = window.performance.now();
+
+  // Note we are started
+  started = true;
 
   // Render the first frame
   requestFrameUpdate();
