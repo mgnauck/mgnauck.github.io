@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="unik.css">
 	</head>
 <body>
-<div>
+<div class="main">
 		<h1 class="title">Selected works by unik and friends</h1>
 		<br>
 		<div class="reference">
@@ -18,16 +18,16 @@
 				<a href="download/bps-macmybitchup.zip">Windows port</a> |
 				<a target="_blank" href="https://github.com/mgnauck/mac-my-bitch-up">source</a><br>
 			</div>
-			<div style="margin-top:5px; border:1px solid black; width:640px; height:480px; overflow:hidden;" id="macbitch">
-				<div style="width:2560px; height:480px; position:relative;" id="macbitch_inner">
-					<img class="macbitch_img" src="images/macbitch/macbitch_0.png" style="float:left; width:640px;"/>
+			<div id="macbitch" class="outer">
+				<div id="macbitch_inner" class="inner">
+					<img class="macbitch_img" src="images/macbitch/macbitch_0.png" class="img"/>
 					<img class="macbitch_img" src="images/macbitch/macbitch_1.png" style="float:left; width:640px;"/>
 					<img class="macbitch_img" src="images/macbitch/macbitch_2.png" style="float:left; width:640px;"/>
 					<img class="macbitch_img" src="images/macbitch/macbitch_3.png" style="float:left; width:640px;"/>
 				</div>
 			</div>
-			<span id="macbitch_prev" onclick="nextImg('macbitch', 640, -1);" style="color:#84b018; text-decoration:line-through; cursor:pointer;">prev</span> |
-			<span id="macbitch_next" onclick="nextImg('macbitch', 640, 1);" style="color:#84b018; text-decoration:none; cursor:pointer;">next</span><br>
+			<span id="macbitch_prev" class="prev" onclick="nextImg('macbitch', 640, -1);">prev</span> |
+			<span id="macbitch_next" class="next" onclick="nextImg('macbitch', 640, 1);">next</span><br>
 		</div>
 
 		<div class="reference">
