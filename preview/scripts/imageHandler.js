@@ -27,7 +27,7 @@ function loadImage(url, id)
 
 function imagesLoaded()
 {
-  for(const image of Object.values(images))
+  for(const image of images.values())
   {
     if(!image.loaded)
     {

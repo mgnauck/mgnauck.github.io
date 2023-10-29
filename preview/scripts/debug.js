@@ -1,10 +1,12 @@
 "use strict";
 
-const displayFramesPerSecondEnabled = true & debugMode;
+let displayFramesPerSecondEnabled = true & debugMode;
+
 const framesPerSecondFontSize = 16;
 
 const framesPerSecondSamples = new Float32Array(100);
 const framesPerSecondSampleWeight = 1.0 / framesPerSecondSamples.length;
+
 let framesPerSecondSampleIndex = 0;
 let averageFramesPerSecond = 0.0;
 

@@ -14,7 +14,7 @@ function initializeEventListener()
     }
   });
 
-  // Start or restart by spacebar
+  // Start/restart by spacebar
   document.addEventListener("keydown", (e) => {
 
 	  if (e.key === " ")
@@ -23,15 +23,23 @@ function initializeEventListener()
 	  }
 	});
   
+  // Stop by escape
+  document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Escape" && running)
+    {
+      stop();
+    }
+  });
+
   // Click to start or if running toggle fullscreen
-  document.addEventListener("click", (e) => { 
+  canvas.addEventListener("click", (e) => { 
 
     if(running)
     {
       toggleFullscreen();
-      return;
     }
-    else if(startByEvent)
+    else
     {
       start();
     }
@@ -40,11 +48,11 @@ function initializeEventListener()
   // Touch canvas to start or if running toggle fullscreen
   canvas.addEventListener("touchstart", (e) => {
 
-    //e.preventDefault();
-
-    //toggleFullscreen();
-
-    if(startByEvent && !running)
+    if(running)
+    {
+      toggleFullscreen();
+    }
+    else
     {
       start();
     }
@@ -55,7 +63,16 @@ function initializeEventListener()
     
     if(e.key == "s")
     {
-      showFps = !showFps;
+      displayFramesPerSecondEnabled = !displayFramesPerSecondEnabled;
+    }
+  });
+
+  // Toggle display frames per second
+  document.addEventListener("keydown", (e) => {
+    
+    if(e.key == "m")
+    {
+      toggleAudio();
     }
   });
 }

@@ -1,6 +1,7 @@
 "use strict";
 
 /// TODO
+/// Loader progress
 /// Timeline/effects/sync handling
 /// Rewrite as classes
 /// Renderer
@@ -8,24 +9,28 @@
 // Canvas
 let canvas = document.getElementById("demodemo");
 let context;
-let fullscreen = false;
 
-// Resolution
+// Settings
+let fullscreen = false;
+const debugMode = true;
+const noAudio = false;
+
+// Window
 const width = canvas.width;
 const height = canvas.height;
 const aspect = width / height;
 
-// Settings
-const debugMode = true;
-const startByEvent = true;
+// Frame update
 const frameRateLimitEnabled = false;
 const frameRateLimit = 100;
 
 // Update
 let loadingIntervalId;
-let requestAnimationFrameId = null;
+let requestAnimationFrameId;
 
-// Timing
+// Flow control
+let autoStart = false;
+let loading = false;
 let running = false;
 let globalStartTime;
 
@@ -75,7 +80,7 @@ function showStartScreen()
   context.fillText("Loading completed.", 3, 220);
   context.fillText("Press F, click or touch again to toggle fullscreen.", 3, 243);
 
-  if(startByEvent)
+  if(!autoStart)
   {
     context.fillText("Press space, click or touch to start.", 3, 266);
   }
@@ -84,6 +89,8 @@ function showStartScreen()
 function load()
 {
   console.log("Loading");
+
+  loading = true;
 
   // Draw loading screen
   showLoadingScreen(0);
@@ -98,10 +105,12 @@ function load()
 
 function isLoadingComplete()
 {
-  let finished = audioLoaded && imagesLoaded();
+  let finished = (audioLoaded || noAudio) && imagesLoaded();
   if(finished)
   {
     console.log("Loading complete");
+
+    loading = false;
 
     // Stop checking if loading has completed
     clearInterval(loadingIntervalId);
@@ -112,7 +121,7 @@ function isLoadingComplete()
     // Setup event listener
     initializeEventListener();
 
-    if(!startByEvent)
+    if(autoStart)
     {
       // Start immediately      
       start();
@@ -146,6 +155,7 @@ function start()
 
   // Note we are started
   running = true;
+  autoStart = false;
 }
 
 function stop()
@@ -154,17 +164,20 @@ function stop()
   {
     console.log("Stopping");
 
-    // Cancel previous frame
-    if(running && requestAnimationFrameId != null)
-    {
-      window.cancelAnimationFrame(requestAnimationFrameId);
-    }
+    // Note we are stopped
+    running = false;
 
     // Stop audio playing
     pauseAudio();
 
-    // Note we are stopped
-    running = false;  
+    // Cancel previous frame
+    if(requestAnimationFrameId != undefined)
+    {
+      window.cancelAnimationFrame(requestAnimationFrameId);
+    }
+
+    // Draw start screen
+    showStartScreen();
   }
 }
 
