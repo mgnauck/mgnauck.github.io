@@ -3,23 +3,20 @@
 function initializeEventListener()
 {
   // Resize canvas on window resize
-  window.onresize = () =>
-    {
-      resizeCanvas();
-    };
+  window.onresize = () => { resizeCanvas(); };
 
   // Press F for fullscreen
-  document.addEventListener("keydown", (e) =>
+  document.addEventListener("keydown", (e) => {
+
+    if (e.key === "f")
     {
-      if (e.key === "f")
-      {
-        toggleFullscreen();
-      }
-    });
+      toggleFullscreen();
+    }
+  });
 
   // Start or restart by spacebar
-  document.addEventListener("keydown", (e) =>
-	{
+  document.addEventListener("keydown", (e) => {
+
 	  if (e.key === " ")
 	  {
 	    start();
@@ -27,38 +24,38 @@ function initializeEventListener()
 	});
   
   // Click to start or if running toggle fullscreen
-  document.addEventListener("click", (e) =>
-    { 
-      if(running)
-      {
-        toggleFullscreen();
-        return;
-      }
-      else if(startByEvent)
-      {
-        start();
-      }
-    });
+  document.addEventListener("click", (e) => { 
+
+    if(running)
+    {
+      toggleFullscreen();
+      return;
+    }
+    else if(startByEvent)
+    {
+      start();
+    }
+  });
 
   // Touch canvas to start or if running toggle fullscreen
-  canvas.addEventListener("touchstart", (e) =>
-    {  
-      e.preventDefault();
+  canvas.addEventListener("touchstart", (e) => {
 
-      toggleFullscreen();
+    e.preventDefault();
 
-      if(startByEvent && !running)
-      {
-        start();
-      }
-    });
+    toggleFullscreen();
+
+    if(startByEvent && !running)
+    {
+      start();
+    }
+  });
 
   // Toggle display frames per second
-  document.addEventListener("keydown", (e) =>
+  document.addEventListener("keydown", (e) => {
+    
+    if(e.key == "s")
     {
-      if(e.key == "s")
-      {
-        showFps = !showFps;
-      }
-    });
+      showFps = !showFps;
+    }
+  });
 }

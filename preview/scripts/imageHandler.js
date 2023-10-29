@@ -1,3 +1,5 @@
+"use strict";
+
 let images = {};
 
 function loadImage(url, id)
@@ -7,17 +9,19 @@ function loadImage(url, id)
   image.onload = () => {
 
     images[id].loaded = true;
+
     console.log(`Image ${url} loaded and available via '${id}'`);
   };
 
   image.onerror = () => {
 
     console.log(`Failed to load image ${url}`);
-    alert("Image loading failed");
   }
 
+  // Store image in our images array
   images[id] = { "image" : image, "loaded" : false };
 
+  // Start loading the image
   image.src = url;
 }
 

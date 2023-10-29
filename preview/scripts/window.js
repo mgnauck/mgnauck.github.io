@@ -2,6 +2,8 @@
 
 function openFullscreen()
 {
+    console.log("Trying to enter fullscreen");
+
     if (canvas.requestFullscreen)
     {
       canvas.requestFullscreen().catch((err) => { console.log(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`); });
@@ -20,6 +22,8 @@ function openFullscreen()
 
 function exitFullscreen()
 {
+  console.log("Trying to leave fullscreen");
+
   if(document.exitFullscreen)
   {
     document.exitFullscreen();  
@@ -32,7 +36,7 @@ function exitFullscreen()
   {
     document.msExitFullscreen();
   }
- 
+
   fullscreen = false;
 }
 
@@ -50,6 +54,8 @@ function toggleFullscreen()
 
 function resizeCanvas()
 {
+  console.log("Resizing canvas");
+
   canvas.style.position = 'absolute';
   canvas.style.cursor = 'none';
 

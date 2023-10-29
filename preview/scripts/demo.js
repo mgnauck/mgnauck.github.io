@@ -1,7 +1,6 @@
 "use strict";
 
 /// TODO
-/// Load image
 /// Timeline handling
 /// Rewrite as classes
 /// Renderer
@@ -32,6 +31,8 @@ let globalStartTime;
 
 function initialize()
 {  
+  console.log("Initializing");
+
   if (canvas.getContext)
   {
     context = canvas.getContext("2d", { alpha: false });
@@ -82,12 +83,14 @@ function showStartScreen()
 
 function load()
 {
+  console.log("Loading");
+
+  // Draw loading screen
   showLoadingScreen(0);
 
   // Load data
   loadAudio("audio/music.mp3");
   loadImage("images/unik2.png", "unikLogo");
-  // TODO
 
   // Start checking if loading has completed
   loadingIntervalId = setInterval(isLoadingComplete, 200);
@@ -98,23 +101,27 @@ function isLoadingComplete()
   let finished = audioLoaded && imagesLoaded();
   if(finished)
   {
+    console.log("Loading complete");
+
     // Stop checking if loading has completed
     clearInterval(loadingIntervalId);
 
+    // Draw start screen
     showStartScreen();
 
     // Setup event listener
     initializeEventListener();
 
-    // Start immediately
     if(!startByEvent)
     {
+      // Start immediately      
       start();
     }    
   }
   else
   {
-    showLoadingScreen(0);
+    // Draw updated loading screen
+    showLoadingScreen(0 /* TODO progress */);
 
     // Reset check if loading has completed
     loadingIntervalId = setInterval(isLoadingComplete, 200);
@@ -125,6 +132,8 @@ function start()
 {
   // Reset (if already running)
   stop();
+
+  console.log("Starting");
 
   // Store global start time
   globalStartTime = window.performance.now();
@@ -141,17 +150,22 @@ function start()
 
 function stop()
 {
-  // Cancel previous frame
-  if(running && requestAnimationFrameId != null)
+  if(running)
   {
-    window.cancelAnimationFrame(requestAnimationFrameId);
+    console.log("Stopping");
+
+    // Cancel previous frame
+    if(running && requestAnimationFrameId != null)
+    {
+      window.cancelAnimationFrame(requestAnimationFrameId);
+    }
+
+    // Stop audio playing
+    pauseAudio();
+
+    // Note we are stopped
+    running = false;  
   }
-
-  // Stop audio playing
-  pauseAudio();
-
-  // Note we are stopped
-  running = false;  
 }
 
 function render(time)
@@ -172,7 +186,6 @@ function render(time)
       pixel(backBuffer32, x, y, 0xff000000 + (c << 16) + (c << 8) + c);
     }    
   }
-  //*/
 }
 
 function updateFrame()
