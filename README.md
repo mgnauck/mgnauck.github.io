@@ -1,9 +1,27 @@
 
 # Selected works by unik and friends
 
+## luminosity
+
+A 64kb intro released at Deadline 2024. Place 4th.
+
+- [Pouet](soon)
+- [Online](https://unik.de/online/luminosity)
+- [Binaries](https://unik.de/download/bypass-luminosity.zip)
+- [YouTube](soon)
+- [Source](soon)
+
+![luminosity screenshot](images/luminosity/luminosity_0.png "luminosity")
+![luminosity screenshot](images/luminosity/luminosity_1.png "luminosity")
+
+![luminosity screenshot](images/luminosity/luminosity_2.png "luminosity")
+![luminosity screenshot](images/luminosity/luminosity_3.png "luminosity")
+
+---
+
 ## elusive
 
-Released at Deadline 2023. Place 6th in the combined intro competition.
+A 4kb intro released at Deadline 2023. Place 6th in the combined intro competition.
 
 - [Pouet](https://www.pouet.net/prod.php?which=95237)
 - [Online](https://unik.de/online/elusive)
@@ -21,7 +39,7 @@ Released at Deadline 2023. Place 6th in the combined intro competition.
 
 ## Mac My Bitch Up
 
-Released at Evoke 2006. Placed 3rd in demo competition.
+A demo released at Evoke 2006. Placed 3rd.
 
 - [Pouet](https://www.pouet.net/prod.php?which=25863)
 - [YouTube](https://www.youtube.com/watch?v=u9Dnidi7b2Y)
@@ -39,7 +57,7 @@ Released at Evoke 2006. Placed 3rd in demo competition.
 
 ## be your own pet
 
-Released at Breakpoint 2006. Placed 6th in the 64kb intro competition.
+A 64kb intro released at Breakpoint 2006. Placed 6th.
 
 - [Pouet](https://www.pouet.net/prod.php?which=24492)
 - [YouTube](https://www.youtube.com/watch?v=qy2na0HiSeU)
@@ -57,7 +75,7 @@ Released at Breakpoint 2006. Placed 6th in the 64kb intro competition.
 
 ## kurz&knackig
 
-Released at Evoke 2005. Placed 3rd in the 4kb intro competition.
+A 4kb intro released at Evoke 2005. Placed 3rd.
 
 - [Pouet](https://www.pouet.net/prod.php?which=18755)
 - [YouTube](https://www.youtube.com/watch?v=Y09mzeJyqGI)
@@ -74,7 +92,7 @@ Released at Evoke 2005. Placed 3rd in the 4kb intro competition.
 
 ## Kardiogramm
 
-Released at Breakpoint 2005. Placed 5th in the 64kb intro competition.
+A 64kb intro released at Breakpoint 2005. Placed 5th.
 
 - [Pouet](https://www.pouet.net/prod.php?which=16347)
 - [YouTube](http://www.youtube.com/watch?v=K5Nd77s98m4)
@@ -92,7 +110,7 @@ Released at Breakpoint 2005. Placed 5th in the 64kb intro competition.
 
 ## Anruf aus Schweden
 
-Released at Evoke 2004. Placed 1st in the 64kb intro competition.
+A 64kb intro released at Evoke 2004. Placed 1st.
 
 - [Pouet](https://www.pouet.net/prod.php?which=13621)
 - [YouTube](https://www.youtube.com/watch?v=tKoB1CchJFU)
@@ -110,7 +128,7 @@ Released at Evoke 2004. Placed 1st in the 64kb intro competition.
 
 ## Subversive
 
-Released at Breakpoint 2003. Placed 3rd in the 64kb intro competition.
+A 64kb intro released at Breakpoint 2003. Placed 3rd.
 
 - [Pouet](https://www.pouet.net/prod.php?which=9443)
 - [YouTube](https://www.youtube.com/watch?v=2JN82TUCeys)
@@ -126,7 +144,7 @@ Released at Breakpoint 2003. Placed 3rd in the 64kb intro competition.
 
 ## Blusher
 
-Released at Geekcamp 2002. Placed 1st in the combined demo/intro competition as 64kb intro.
+A 64kb intro released at Geekcamp 2002. Placed 1st in the combined demo/intro competition.
 
 - [Pouet](https://www.pouet.net/prod.php?which=7840)
 - [YouTube](http://www.youtube.com/watch?v=UoOln2gl6hM)
@@ -143,7 +161,7 @@ Released at Geekcamp 2002. Placed 1st in the combined demo/intro competition as 
 
 ## Intense Pattern
 
-Released at Mekka & Symposium 2002. Placed 7th in the demo competition.
+A demo released at Mekka & Symposium 2002. Placed 7th.
 
 - [Pouet](https://www.pouet.net/prod.php?which=5587)
 - [YouTube](https://www.youtube.com/watch?v=w_w2Qu8bCYc)
@@ -159,7 +177,7 @@ Released at Mekka & Symposium 2002. Placed 7th in the demo competition.
 
 ## Discoranger
 
-Released at Dialogos 2001. Placed 1st in the 64kb intro competition.
+A 64kb intro released at Dialogos 2001. Placed 1st.
 
 - [Pouet](https://www.pouet.net/prod.php?which=4134)
 - [YouTube](https://youtu.be/7q2VZ6A2AoE)
@@ -177,7 +195,7 @@ Released at Dialogos 2001. Placed 1st in the 64kb intro competition.
 
 ## shrooms
 
-Released at Takeover 2001. Placed 1st in the 64kb intro competition.
+A 64kb intro released at Takeover 2001. Placed 1st.
 
 - [Pouet](https://www.pouet.net/prod.php?which=2908)
 - [YouTube](https://www.youtube.com/watch?v=k2lbRBxZXF8)
@@ -193,7 +211,7 @@ Released at Takeover 2001. Placed 1st in the 64kb intro competition.
 
 ## Lovemachine
 
-Released at Dialogos 2000. Placed 2nd in the 64kb intro competition.
+A 64kb intro released at Dialogos 2000. Placed 2nd.
 
 - [Pouet](https://www.pouet.net/prod.php?which=761)
 - [YouTube](https://youtu.be/LmUn5tCUAiA)
@@ -209,7 +227,7 @@ Released at Dialogos 2000. Placed 2nd in the 64kb intro competition.
 
 ## Defrost
 
-Released at Evoke 2000. Placed 2nd in the 64kb intro competition.
+A 64kb intro released at Evoke 2000. Placed 2nd.
 
 - [Pouet](https://www.pouet.net/prod.php?which=241)
 - [YouTube](https://youtu.be/ipUabPuqMeE)
@@ -226,7 +244,7 @@ Released at Evoke 2000. Placed 2nd in the 64kb intro competition.
 
 ## Pluxity
 
-Released at Takeover 2000. Placed 1st in the 64kb intro competition.
+A 64kb intro released at Takeover 2000. Placed 1st.
 
 - [Pouet](https://www.pouet.net/prod.php?which=169)
 - [YouTube](https://www.youtube.com/watch?v=ME6QsEc2twI)
@@ -242,7 +260,7 @@ Released at Takeover 2000. Placed 1st in the 64kb intro competition.
 
 ## Plainwork
 
-Released at Mekka & Symposium 2000. Placed 8th in the 64kb intro competition.
+A 64kb intro released at Mekka & Symposium 2000. Placed 8th.
 
 - [Pouet](https://www.pouet.net/prod.php?which=168)
 - [YouTube](https://www.youtube.com/watch?v=TjeeotLlUwk)
