@@ -8,8 +8,9 @@ A 64kb intro released at Deadline 2024. Place 4th.
 - [Pouet](https://www.pouet.net/prod.php?which=98327)
 - [Online](https://unik.de/online/luminosity)
 - [Binaries](https://unik.de/download/bypass-luminosity.zip)
-- [YouTube](soon)
-- [Source](soon)
+- [YouTube (converged)](https://www.youtube.com/watch?v=KrE181wamdo)
+- [YouTube (live)](https://youtu.be/r5-l9bODF0c?t=1594)
+- [Source](SOON)
 
 ![luminosity screenshot](images/luminosity/luminosity_0.png "luminosity")
 ![luminosity screenshot](images/luminosity/luminosity_1.png "luminosity")
