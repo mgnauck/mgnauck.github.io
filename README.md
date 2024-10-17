@@ -10,7 +10,7 @@ A 64kb intro released at Deadline 2024. Place 4th.
 - [Binaries](https://unik.de/download/bypass-luminosity.zip)
 - [YouTube (converged)](https://www.youtube.com/watch?v=KrE181wamdo)
 - [YouTube (live)](https://youtu.be/r5-l9bODF0c?t=1594)
-- [Source](SOON)
+- [Source](https://github.com/mgnauck/luminosity)
 
 ![luminosity screenshot](images/luminosity/luminosity_0.png "luminosity")
 ![luminosity screenshot](images/luminosity/luminosity_1.png "luminosity")
